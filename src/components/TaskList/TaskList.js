@@ -1,13 +1,14 @@
 import Task from "../Task";
 
-const TaskList = ({ todos }) => {
+const TaskList = ({ todos, onDelete }) => {
     
     const items = todos.map((item) => { 
+        const {id, label} = item;
         return (
             <Task 
-                t={item}
-                key={item.created}
-                complete={item.complete} 
+                label = {label}
+                key = {id}
+                onDelete = { () => onDelete(id) }
             />
         ); 
     });
