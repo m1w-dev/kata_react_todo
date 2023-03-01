@@ -1,3 +1,4 @@
+import propTypes from 'prop-types';
 import TasksFilter from "../TasksFilter";
 
 const Footer = ({count, clearDone, filter, currentFilter}) => {
@@ -9,5 +10,19 @@ const Footer = ({count, clearDone, filter, currentFilter}) => {
         </footer>
     );
 }
+
+Footer.defaultProps = {
+    count: undefined,
+    filter: () => {}, 
+    currentFilter: 'all',
+    clearDone: () => {},
+  }
+  
+Footer.propTypes = {
+    count: propTypes.number,
+    filter: propTypes.func,
+    currentFilter: propTypes.oneOf(['all', 'active', 'completed']),
+    clearDone: propTypes.func,
+  }
 
 export default Footer;

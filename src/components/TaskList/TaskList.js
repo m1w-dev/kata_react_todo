@@ -1,3 +1,4 @@
+import propTypes from 'prop-types';
 import Task from "../Task";
 
 const TaskList = ({ todos, onDelete, onChangeStatus }) => {
@@ -22,5 +23,25 @@ const TaskList = ({ todos, onDelete, onChangeStatus }) => {
         </ul>
     );
 }
+
+TaskList.defaultProps = {
+    todos: [],
+    onDelete: () => {},
+    onChangeStatus: () => {}, 
+  }
+  
+TaskList.propTypes = {
+    todos: 
+        propTypes.arrayOf(
+            propTypes.shape({
+                label: propTypes.string,
+                done: propTypes.bool,
+                display: propTypes.bool,
+                id: propTypes.any,
+            })
+        ),
+    onDelete: propTypes.func,
+    onChangeStatus: propTypes.func,
+  }
 
 export default TaskList;

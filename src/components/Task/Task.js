@@ -1,15 +1,46 @@
-import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import {Component} from 'react';
+import propTypes from 'prop-types';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+
+
 
 
 export default class Task extends Component {
 
+  static defaultProps = {
+    label: undefined,
+    done: false,
+    created: new Date(),
+    onChangeStatus: () => {},
+    onDelete: () => {},
+  }
+  
+  static propTypes = {
+    label: propTypes.string.isRequired,
+    done: propTypes.bool,
+    created: propTypes.instanceOf(Date), 
+    onChangeStatus: propTypes.func,
+    onDelete: propTypes.func,
+  }
+
   state = {
     edited: false,
+    createdFormat: formatDistanceToNow(this.props.created, {includeSeconds: true}),
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(
+      () => this.setState({createdFormat: formatDistanceToNow(this.props.created, {includeSeconds: true})}),
+      1000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
   }
 
   render() {
-    const {edited} = this.state;
+    const {edited, createdFormat} = this.state;
     const {done, label} = this.props;
 
     let classNames = '';
@@ -23,7 +54,7 @@ export default class Task extends Component {
               <label>
                 <span className="description">{label}</span>
                 <span className="created">
-                  {`created ${formatDistanceToNow(new Date(), {includeSeconds: true})} ago`}</span>
+                  {`created ${createdFormat} ago`}</span>
               </label>
               <button className="icon icon-edit"></button>
               <button className="icon icon-destroy" onClick={ this.props.onDelete }></button>

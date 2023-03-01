@@ -71,6 +71,9 @@ export default class App extends Component {
             case 'completed':
               display = task.done === true ? true : false;
               break;
+            default: 
+              display = true;
+              break;
           }
           return {...task, display: display}
         })
