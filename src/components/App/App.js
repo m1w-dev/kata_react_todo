@@ -8,11 +8,7 @@ export default class App extends Component {
   currentId = 0
 
   state = {
-    todoData: [
-      this.createTaskConfig('Drink coffee'),
-      this.createTaskConfig('Drink tea'),
-      this.createTaskConfig('Drink pepsi'),
-    ],
+    todoData: [],
     currentFilter: 'all',
   }
 
