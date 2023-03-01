@@ -1,20 +1,16 @@
-const TasksFilter = () => {
-    return (
-        <footer className="footer">
-          <span className="todo-count">1 items left</span>
-          <ul className="filters">
+const TasksFilter = ({filter, currentFilter}) => {
+    return(
+        <ul className="filters">
             <li>
-              <button class="selected">All</button>
+                <button className={currentFilter == 'all' ? "selected" : ""} onClick={() => {filter('all')}}>All</button>
             </li>
             <li>
-              <button>Active</button>
+              <button className={currentFilter == 'active' ? "selected" : ""} onClick={() => {filter('active')}}>Active</button>
             </li>
             <li>
-              <button>Completed</button>
+              <button className={currentFilter == 'completed' ? "selected" : ""} onClick={() => {filter('completed')}}>Completed</button>
             </li>
-          </ul>
-          <button className="clear-completed">Clear completed</button>
-        </footer>
+        </ul>
     );
 }
 

@@ -1,21 +1,11 @@
 import TasksFilter from "../TasksFilter";
 
-const Footer = () => {
+const Footer = ({count, clearDone, filter, currentFilter}) => {
     return (
        <footer className="footer">
-          <span className="todo-count">1 items left</span>
-          <ul className="filters">
-            <li>
-              <button className="selected">All</button>
-            </li>
-            <li>
-              <button>Active</button>
-            </li>
-            <li>
-              <button>Completed</button>
-            </li>
-          </ul>
-          <button className="clear-completed">Clear completed</button>
+          <span className="todo-count">{count} items left</span>
+          <TasksFilter filter={(filterMode) => {filter(filterMode)}} currentFilter={currentFilter}/>
+          <button className="clear-completed" onClick={clearDone}>Clear completed</button>
         </footer>
     );
 }
