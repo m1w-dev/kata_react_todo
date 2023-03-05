@@ -32,6 +32,16 @@ export default class App extends Component {
     this.tasksFilter(this.state.currentFilter);
   };
 
+  changeTaskLabel = (id, newLabel) => {
+    this.setState(({ todoData }) => {
+      const index = todoData.findIndex((el) => el.id === id);
+      const updatedItem = { ...todoData[index], label: newLabel };
+      return {
+        todoData: [...todoData.slice(0, index), updatedItem, ...todoData.slice(index + 1)],
+      };
+    });
+  };
+
   createTask = (label) => {
     this.setState(({ todoData }) => {
       return {
@@ -78,7 +88,12 @@ export default class App extends Component {
       <section className="todoapp">
         <NewTaskForm createTask={this.createTask} />
         <section className="main">
-          <TaskList todos={todoData} onDelete={this.deleteTaskFromList} onChangeStatus={this.changeTaskStatus} />
+          <TaskList
+            todos={todoData}
+            onDelete={this.deleteTaskFromList}
+            onChangeStatus={this.changeTaskStatus}
+            onChangeLabel={this.changeTaskLabel}
+          />
           <Footer
             count={todoData.filter((el) => el.done === false).length}
             filter={this.tasksFilter}

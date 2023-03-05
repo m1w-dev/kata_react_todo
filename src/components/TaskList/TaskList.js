@@ -2,7 +2,7 @@ import propTypes from 'prop-types';
 
 import Task from '../Task';
 
-const TaskList = ({ todos, onDelete, onChangeStatus }) => {
+const TaskList = ({ todos, onDelete, onChangeStatus, onChangeLabel }) => {
   const items = todos.map((item) => {
     const { id, label, done, display } = item;
     if (!display) return null;
@@ -13,6 +13,7 @@ const TaskList = ({ todos, onDelete, onChangeStatus }) => {
         done={done}
         onDelete={() => onDelete(id)}
         onChangeStatus={() => onChangeStatus(id)}
+        onChangeLabel={(label) => onChangeLabel(id, label)}
       />
     );
   });
@@ -24,6 +25,7 @@ TaskList.defaultProps = {
   todos: [],
   onDelete: () => {},
   onChangeStatus: () => {},
+  onChangeLabel: () => {},
 };
 
 TaskList.propTypes = {
@@ -37,6 +39,7 @@ TaskList.propTypes = {
   ),
   onDelete: propTypes.func,
   onChangeStatus: propTypes.func,
+  onChangeLabel: propTypes.func,
 };
 
 export default TaskList;

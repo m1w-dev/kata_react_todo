@@ -9,6 +9,7 @@ export default class Task extends Component {
     created: new Date(),
     onChangeStatus: () => {},
     onDelete: () => {},
+    onChangeLabel: () => {},
   };
 
   static propTypes = {
@@ -17,11 +18,13 @@ export default class Task extends Component {
     created: propTypes.instanceOf(Date),
     onChangeStatus: propTypes.func,
     onDelete: propTypes.func,
+    onChangeLabel: propTypes.func,
   };
 
   state = {
     edited: false,
     createdFormat: formatDistanceToNow(this.props.created, { includeSeconds: true }),
+    newLabel: this.props.label,
   };
 
   componentDidMount() {
@@ -35,8 +38,19 @@ export default class Task extends Component {
     clearInterval(this.timerID);
   }
 
+  changeLabel = (e) => {
+    if (e.key === 'Enter') {
+      this.props.onChangeLabel(e.target.value);
+      this.setState({ edited: false });
+    }
+  };
+
+  enableEdit = () => {
+    this.setState({ edited: true });
+  };
+
   render() {
-    const { edited, createdFormat } = this.state;
+    const { edited, createdFormat, newLabel } = this.state;
     const { done, label } = this.props;
 
     let classNames = '';
@@ -51,9 +65,18 @@ export default class Task extends Component {
             <span className="description">{label}</span>
             <span className="created">{`created ${createdFormat} ago`}</span>
           </label>
-          <button className="icon icon-edit"></button>
+          <button className="icon icon-edit" onClick={this.enableEdit}></button>
           <button className="icon icon-destroy" onClick={this.props.onDelete}></button>
         </div>
+        <input
+          type="text"
+          className="edit"
+          value={newLabel}
+          onInput={(e) => {
+            this.setState({ newLabel: e.target.value });
+          }}
+          onKeyDown={this.changeLabel}
+        ></input>
       </li>
     );
   }
