@@ -29,6 +29,7 @@ export default class App extends Component {
         todoData: [...todoData.slice(0, index), updatedItem, ...todoData.slice(index + 1)],
       };
     });
+    this.tasksFilter(this.state.currentFilter);
   };
 
   createTask = (label) => {
