@@ -1,3 +1,3 @@
-# Kata React Todo v. 1.5.5
+# Kata React Todo v. 2.3.9
 
-## Published on [kata-react-todo.dev.m1w.ru](https://kata-react-todo.dev.m1w.ru)
+## Published on [kata-react-todo-timer.dev.m1w.ru](https://kata-react-todo-timer.dev.m1w.ru)
