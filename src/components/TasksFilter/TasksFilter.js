@@ -1,4 +1,4 @@
-import propTypes from 'prop-types'
+import propTypes from 'prop-types';
 
 const TasksFilter = ({ filter, currentFilter }) => {
   return (
@@ -7,7 +7,7 @@ const TasksFilter = ({ filter, currentFilter }) => {
         <button
           className={currentFilter === 'all' ? 'selected' : ''}
           onClick={() => {
-            filter('all')
+            filter('all');
           }}
         >
           All
@@ -17,7 +17,7 @@ const TasksFilter = ({ filter, currentFilter }) => {
         <button
           className={currentFilter === 'active' ? 'selected' : ''}
           onClick={() => {
-            filter('active')
+            filter('active');
           }}
         >
           Active
@@ -27,24 +27,24 @@ const TasksFilter = ({ filter, currentFilter }) => {
         <button
           className={currentFilter === 'completed' ? 'selected' : ''}
           onClick={() => {
-            filter('completed')
+            filter('completed');
           }}
         >
           Completed
         </button>
       </li>
     </ul>
-  )
-}
+  );
+};
 
 TasksFilter.defaultProps = {
   filter: () => {},
   currentFilter: 'all',
-}
+};
 
 TasksFilter.propTypes = {
   filter: propTypes.func,
   currentFilter: propTypes.oneOf(['all', 'active', 'completed']),
-}
+};
 
-export default TasksFilter
+export default TasksFilter;

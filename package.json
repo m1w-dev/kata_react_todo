@@ -49,8 +49,8 @@
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix --color",
     "prettier": "prettier ./src --check",
-    "prettier:fix": "prettier ./src --check --write",
-    "format": "npm run prettier:fix && npm run lint:fix"
+    "prettier:fix": "prettier ./src --write",
+    "format": "npm run lint:fix && npm run prettier:fix"
   },
   "eslintConfig": {
     "extends": [

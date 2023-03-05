@@ -1,11 +1,11 @@
-import propTypes from 'prop-types'
+import propTypes from 'prop-types';
 
-import Task from '../Task'
+import Task from '../Task';
 
-const TaskList = ({ todos, onDelete, onChangeStatus }) => {
+const TaskList = ({ todos, onDelete, onChangeStatus, onChangeLabel }) => {
   const items = todos.map((item) => {
-    const { id, label, done, display } = item
-    if (!display) return null
+    const { id, label, done, display } = item;
+    if (!display) return null;
     return (
       <Task
         label={label}
@@ -13,18 +13,20 @@ const TaskList = ({ todos, onDelete, onChangeStatus }) => {
         done={done}
         onDelete={() => onDelete(id)}
         onChangeStatus={() => onChangeStatus(id)}
+        onChangeLabel={(label) => onChangeLabel(id, label)}
       />
-    )
-  })
+    );
+  });
 
-  return <ul className="todo-list">{items}</ul>
-}
+  return <ul className="todo-list">{items}</ul>;
+};
 
 TaskList.defaultProps = {
   todos: [],
   onDelete: () => {},
   onChangeStatus: () => {},
-}
+  onChangeLabel: () => {},
+};
 
 TaskList.propTypes = {
   todos: propTypes.arrayOf(
@@ -37,6 +39,7 @@ TaskList.propTypes = {
   ),
   onDelete: propTypes.func,
   onChangeStatus: propTypes.func,
-}
+  onChangeLabel: propTypes.func,
+};
 
-export default TaskList
+export default TaskList;
